@@ -1,0 +1,17 @@
+#voltron.session
+
+#selectp -t 0 		# select the first (0) pane - Disassembly - 0
+splitw -h -p 20 	# split it into two halves - Registers - 4
+splitw -v -p 20 	# split it into two halves - Shell - 5
+
+selectp -t 0 		# select Disassembly pane
+splitw -v -p 50 	# split it into two halves - Commands - 1
+splitw -v -p 40 	# split it into two halves - Stack - 2
+splitw -h -p 30 	# split it into two halves - Backtrace - 3
+selectp -t 1 		# go back to Commands
+
+send -t 1 C-z 'gdb' Enter	# Open GDB
+send -t 2 C-z 'python ~/opt/voltron/voltron/voltron.py view stack' Enter	# Open Stack view
+send -t 3 C-z 'python ~/opt/voltron/voltron/voltron.py view bt' Enter	# Open backtrace view
+send -t 4 C-z 'python ~/opt/voltron/voltron/voltron.py view reg -v' Enter	# Open registers view
+send -t 0 C-z 'python ~/opt/voltron/voltron/voltron.py view disasm' Enter	# Open disassembly view
